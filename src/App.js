@@ -1,28 +1,3 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-
 import React from 'react';
 import CarList from './components/CarList';
 import './App.css';
@@ -34,6 +9,9 @@ function App() {
         <h1>Convergent Car Dealership</h1>
       </header>
       <CarList />
+      <footer className="App-footer">
+        <p>&copy; 2025 Convergent Car Dealership. All Rights Reserved.</p>
+      </footer>
     </div>
   );
 }

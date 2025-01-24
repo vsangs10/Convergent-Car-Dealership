@@ -1,0 +1,87 @@
+.car-list-container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+  }
+  
+  .control-menu {
+    padding: 20px;
+    border-right: 1px solid #ddd;
+    margin-right: 20px;
+    width: 250px;
+    background-color: #f0f0f0;
+  }
+  
+  .control-menu h2 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #001f3f;
+  }
+  
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #001f3f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .dropdown-content {
+    margin-top: 10px;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+  }
+  
+  .car-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    flex-grow: 1;
+  }
+  
+  .car-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #fff;
+  }
+  
+  .car-card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+  }
+  
+  .car-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .car-info {
+    padding: 10px;
+  }
+  
+  .car-info h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #001f3f;
+  }
+  
+  .car-info p {
+    margin: 5px 0 0;
+    color: #888;
+  }
+  
