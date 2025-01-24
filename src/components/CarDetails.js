@@ -6,7 +6,11 @@ function CarDetails({ car, onBack }) {
     <div className="car-details">
       <button onClick={onBack} className="back-button">Back to List</button>
       <div className="details-header">
-        <img src={car.image || 'https://via.placeholder.com/300'} alt={`${car.make} ${car.model}`} className="details-image" />
+        <img
+          src={car.image || 'https://via.placeholder.com/300'}
+          alt={`${car.make} ${car.model}`}
+          className="details-image"
+        />
         <div className="details-info">
           <div className="details-info-row">
             <p><strong>Make:</strong> {car.make}</p>

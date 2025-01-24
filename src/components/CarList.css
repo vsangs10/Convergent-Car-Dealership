@@ -1,67 +1,125 @@
 .car-list-container {
     display: flex;
-    flex-direction: row;
-    padding: 20px;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
   }
   
-  .control-menu {
-    padding: 20px;
-    border-right: 1px solid #ddd;
-    margin-right: 20px;
-    width: 250px;
+  /* Top Menu Bar */
+  .top-menu-bar {
+    display: flex;
+    align-items: center;
     background-color: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    /* Center it horizontally */
+    justify-content: center;
+    gap: 20px;
   }
   
-  .control-menu h2 {
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    color: #001f3f;
-  }
-  
-  .dropdown-container {
+  /* Each menu item with hover dropdown */
+  .menu-item {
     position: relative;
   }
   
-  .dropdown-button {
-    width: 100%;
-    padding: 10px;
+  /* Button that triggers hover */
+  .hover-button {
     background-color: #001f3f;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 10px 15px;
     cursor: pointer;
+    border-radius: 4px;
+    min-width: 100px;
+    text-align: center;
   }
   
-  .dropdown-content {
-    margin-top: 10px;
+  .hover-button:hover {
+    background-color: #003366;
+  }
+  
+  /* The dropdown that appears on hover */
+  .hover-dropdown {
+    display: none;
+    position: absolute;
+    top: 40px; /* below the hover-button */
+    left: 0;
     background: #fff;
-    padding: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    padding: 5px;
+    z-index: 10;
+    min-width: 150px;
+  }
+  
+  /* Show the dropdown on hover */
+  .menu-item:hover .hover-dropdown {
+    display: block;
+  }
+  
+  .hover-dropdown button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 8px 10px;
+    cursor: pointer;
+    color: #001f3f;
+  }
+  .hover-dropdown button:hover {
+    background-color: #eee;
+  }
+  
+  .compare-button {
+    background-color: #FF851B;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .compare-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
   }
   
   .car-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
     padding: 20px;
-    flex-grow: 1;
   }
   
+  /* Car Card */
   .car-card {
     border: 1px solid #ddd;
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
     background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  
+  /* Compare checkbox in the corner */
+  .compare-checkbox {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+    padding: 5px;
+  }
+  
+  .car-card-content {
+    cursor: pointer;
   }
   
   .car-card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transform: scale(1.02);
   }
   
   .car-image {
