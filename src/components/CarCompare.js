@@ -3,18 +3,15 @@ import axios from 'axios';
 import './CarCompare.css';
 
 function CarCompare({ cars, onBack }) {
-  // We'll store the "detailed" versions of each selected car here.
   const [detailedCars, setDetailedCars] = useState([]);
 
   useEffect(() => {
     async function fetchCarDetails() {
       try {
         const carDetailsPromises = cars.map(async (car) => {
-          // If we already have full info (check if car.description?), skip fetch
           if (car.description) {
             return car;
           }
-          // Otherwise, fetch the full info from the API
           const response = await axios.get(`https://dealership.naman.zip/car/${car.id}`);
           return response.data;
         });

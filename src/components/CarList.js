@@ -13,10 +13,8 @@ function CarList() {
   const [compareCars, setCompareCars] = useState([]); // for storing selected cars to compare
   const [viewMode, setViewMode] = useState('list');   // 'list', 'detail', 'compare', or 'favorites'
   
-  // NEW: Favorites
   const [favorites, setFavorites] = useState([]);
 
-  // Fetch and sort cars whenever sortKey or sortDirection changes
   useEffect(() => {
     if (viewMode === 'list') {
       axios
@@ -38,7 +36,6 @@ function CarList() {
       .catch(error => console.error('Error fetching car details:', error));
   };
 
-  // Sort changes
   const handleSortKeyChange = (key) => {
     setSortKey(key);
   };
@@ -47,7 +44,6 @@ function CarList() {
     setSortDirection(dir);
   };
 
-  // Compare-related logic
   const handleCompareCheckboxChange = (car) => {
     const alreadyInCompare = compareCars.some(c => c.id === car.id);
     let updatedCompareCars;
@@ -65,18 +61,14 @@ function CarList() {
     }
   };
 
-  // Favorites-related logic
   const handleFavoriteClick = (car, e) => {
-    // Prevent clicking the card behind the heart
     e.stopPropagation();
 
     const alreadyFav = favorites.some(f => f.id === car.id);
     let updatedFavorites;
     if (alreadyFav) {
-      // Remove from favorites
       updatedFavorites = favorites.filter(f => f.id !== car.id);
     } else {
-      // Add to favorites
       updatedFavorites = [...favorites, car];
     }
     setFavorites(updatedFavorites);
@@ -87,7 +79,6 @@ function CarList() {
     setSelectedCar(null);
   };
 
-  // Navigation
   const goBackToList = () => {
     setViewMode('list');
     setSelectedCar(null);
@@ -98,7 +89,6 @@ function CarList() {
     setSelectedCar(null);
   };
 
-  // Render logic for different views
   if (viewMode === 'detail' && selectedCar) {
     return <CarDetails car={selectedCar} onBack={goBackFromDetails} />;
   }
@@ -118,13 +108,12 @@ function CarList() {
     );
   }
 
-  // Default: list view
   return (
     <div className="car-list-container">
-      {/* Top Menu Bar (centered) */}
+      {}
       <div className="top-menu-bar">
 
-        {/* SORT BY menu */}
+        {}
         <div className="menu-item">
           <button className="hover-button">Sort By</button>
           <div className="hover-dropdown">
@@ -158,7 +147,7 @@ function CarList() {
           </div>
         </div>
 
-        {/* SORT DIRECTION menu */}
+        {}
         <div className="menu-item">
           <button className="hover-button">Direction</button>
           <div className="hover-dropdown">
@@ -171,7 +160,7 @@ function CarList() {
           </div>
         </div>
 
-        {/* COMPARE BUTTON */}
+        {}
         <div className="menu-item">
           <button
             className="compare-button"
@@ -183,7 +172,7 @@ function CarList() {
           </button>
         </div>
 
-        {/* YOUR FAVORITES BUTTON */}
+        {}
         <div className="menu-item">
           <button
             className="favorites-button"
@@ -196,14 +185,14 @@ function CarList() {
         </div>
       </div>
 
-      {/* CAR GRID LIST */}
+      {}
       <div className="car-grid">
         {cars.map(car => {
           const isSelectedForCompare = compareCars.some(c => c.id === car.id);
           const isFavorite = favorites.some(f => f.id === car.id);
           return (
             <div key={car.id} className="car-card">
-              {/* Compare checkbox (top-left) */}
+              {}
               <div className="compare-checkbox">
                 <input
                   type="checkbox"
@@ -212,7 +201,7 @@ function CarList() {
                 />
               </div>
 
-              {/* Favorite heart (top-right) */}
+              {}
               <div
                 className="favorite-icon"
                 onClick={(e) => handleFavoriteClick(car, e)}
@@ -221,7 +210,7 @@ function CarList() {
                 {isFavorite ? '❤️' : '🤍'}
               </div>
 
-              {/* The car card content (click for details) */}
+              {}
               <div
                 className="car-card-content"
                 onClick={() => handleCarClick(car)}

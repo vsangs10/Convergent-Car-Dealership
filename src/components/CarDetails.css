@@ -1,4 +1,3 @@
-/* CarDetails.css */
 
 .car-details {
     padding: 20px;
@@ -43,7 +42,7 @@
   }
   
   .details-info p strong {
-    color: #18BC9C; /* teal accent for labels */
+    color: #18BC9C; 
   }
   
   .details-description {

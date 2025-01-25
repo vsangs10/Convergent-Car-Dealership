@@ -1,5 +1,5 @@
 import React from 'react';
-import './CarList.css'; // Reuse the same styles for the grid/cards or create a new FavoritesList.css
+import './CarList.css'; 
 
 function FavoritesList({ favorites, onCarClick, onFavoriteClick, onBack }) {
   return (
@@ -13,17 +13,17 @@ function FavoritesList({ favorites, onCarClick, onFavoriteClick, onBack }) {
           {favorites.map((car) => {
             return (
               <div key={car.id} className="car-card">
-                {/* Heart icon (top-right) */}
+                {}
                 <div
                   className="favorite-icon"
                   onClick={(e) => onFavoriteClick(car, e)}
                   title="Remove from Favorites"
                 >
-                  {/* It's definitely a favorite here */}
+                  {}
                   {'❤️'}
                 </div>
 
-                {/* Click for details */}
+                {}
                 <div
                   className="car-card-content"
                   onClick={() => onCarClick(car)}
