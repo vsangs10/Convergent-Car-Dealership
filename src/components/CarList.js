@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CarDetails from './CarDetails';
 import CarCompare from './CarCompare';
+import FavoritesList from './FavoritesList';
 import './CarList.css';
 
 function CarList() {
@@ -10,17 +11,22 @@ function CarList() {
   const [sortKey, setSortKey] = useState('price');
   const [sortDirection, setSortDirection] = useState('asc');
   const [compareCars, setCompareCars] = useState([]); // for storing selected cars to compare
-  const [viewMode, setViewMode] = useState('list');   // 'list', 'detail', or 'compare'
+  const [viewMode, setViewMode] = useState('list');   // 'list', 'detail', 'compare', or 'favorites'
+  
+  // NEW: Favorites
+  const [favorites, setFavorites] = useState([]);
 
   // Fetch and sort cars whenever sortKey or sortDirection changes
   useEffect(() => {
-    axios
-      .get(`https://dealership.naman.zip/cars/sort?key=${sortKey}&direction=${sortDirection}`)
-      .then(response => {
-        setCars(response.data);
-      })
-      .catch(error => console.error('Error fetching cars:', error));
-  }, [sortKey, sortDirection]);
+    if (viewMode === 'list') {
+      axios
+        .get(`https://dealership.naman.zip/cars/sort?key=${sortKey}&direction=${sortDirection}`)
+        .then(response => {
+          setCars(response.data);
+        })
+        .catch(error => console.error('Error fetching cars:', error));
+    }
+  }, [sortKey, sortDirection, viewMode]);
 
   const handleCarClick = (car) => {
     axios
@@ -32,7 +38,7 @@ function CarList() {
       .catch(error => console.error('Error fetching car details:', error));
   };
 
-  // Separate handlers for changing sort key vs direction
+  // Sort changes
   const handleSortKeyChange = (key) => {
     setSortKey(key);
   };
@@ -43,7 +49,6 @@ function CarList() {
 
   // Compare-related logic
   const handleCompareCheckboxChange = (car) => {
-    // Toggle the car in the compareCars array
     const alreadyInCompare = compareCars.some(c => c.id === car.id);
     let updatedCompareCars;
     if (alreadyInCompare) {
@@ -55,12 +60,34 @@ function CarList() {
   };
 
   const startCompare = () => {
-    // Only trigger compare if we have at least 2 selected cars
     if (compareCars.length >= 2) {
       setViewMode('compare');
     }
   };
 
+  // Favorites-related logic
+  const handleFavoriteClick = (car, e) => {
+    // Prevent clicking the card behind the heart
+    e.stopPropagation();
+
+    const alreadyFav = favorites.some(f => f.id === car.id);
+    let updatedFavorites;
+    if (alreadyFav) {
+      // Remove from favorites
+      updatedFavorites = favorites.filter(f => f.id !== car.id);
+    } else {
+      // Add to favorites
+      updatedFavorites = [...favorites, car];
+    }
+    setFavorites(updatedFavorites);
+  };
+
+  const goToFavorites = () => {
+    setViewMode('favorites');
+    setSelectedCar(null);
+  };
+
+  // Navigation
   const goBackToList = () => {
     setViewMode('list');
     setSelectedCar(null);
@@ -71,7 +98,7 @@ function CarList() {
     setSelectedCar(null);
   };
 
-  // Render logic
+  // Render logic for different views
   if (viewMode === 'detail' && selectedCar) {
     return <CarDetails car={selectedCar} onBack={goBackFromDetails} />;
   }
@@ -80,12 +107,23 @@ function CarList() {
     return <CarCompare cars={compareCars} onBack={goBackToList} />;
   }
 
+  if (viewMode === 'favorites') {
+    return (
+      <FavoritesList
+        favorites={favorites}
+        onCarClick={handleCarClick}
+        onBack={goBackToList}
+        onFavoriteClick={handleFavoriteClick}
+      />
+    );
+  }
+
   // Default: list view
   return (
     <div className="car-list-container">
-
       {/* Top Menu Bar (centered) */}
       <div className="top-menu-bar">
+
         {/* SORT BY menu */}
         <div className="menu-item">
           <button className="hover-button">Sort By</button>
@@ -144,14 +182,28 @@ function CarList() {
             Compare ({compareCars.length})
           </button>
         </div>
+
+        {/* YOUR FAVORITES BUTTON */}
+        <div className="menu-item">
+          <button
+            className="favorites-button"
+            onClick={goToFavorites}
+            disabled={favorites.length === 0}
+            title="View your favorite cars"
+          >
+            Your Favorites ({favorites.length})
+          </button>
+        </div>
       </div>
 
       {/* CAR GRID LIST */}
       <div className="car-grid">
         {cars.map(car => {
           const isSelectedForCompare = compareCars.some(c => c.id === car.id);
+          const isFavorite = favorites.some(f => f.id === car.id);
           return (
             <div key={car.id} className="car-card">
+              {/* Compare checkbox (top-left) */}
               <div className="compare-checkbox">
                 <input
                   type="checkbox"
@@ -159,6 +211,17 @@ function CarList() {
                   onChange={() => handleCompareCheckboxChange(car)}
                 />
               </div>
+
+              {/* Favorite heart (top-right) */}
+              <div
+                className="favorite-icon"
+                onClick={(e) => handleFavoriteClick(car, e)}
+                title={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
+              >
+                {isFavorite ? '❤️' : '🤍'}
+              </div>
+
+              {/* The car card content (click for details) */}
               <div
                 className="car-card-content"
                 onClick={() => handleCarClick(car)}

@@ -1,23 +1,36 @@
+/* If not already imported in HTML, import here. Uncomment if needed:
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+*/
+
+/* Example global styles (already in your code) */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #ECF0F1; /* Light gray background */
+  font-family: 'Montserrat', sans-serif; /* Main font */
+}
+
+/* The overall container */
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .App-header {
-  background-color: #001f3f;
+  background-color: #2C3E50; /* Dark navy */
   padding: 20px;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  /* ...your existing styles... */
 }
 
-.App-footer {
-  margin-top: auto;
-  padding: 10px;
-  background-color: #001f3f;
-  color: white;
-  text-align: center;
-  font-size: 0.9rem;
+/* NEW: change the <h1> font to Quicksand */
+.App-header h1 {
+  font-family: 'Quicksand', sans-serif;  /* the new, fun-but-professional font */
+  font-weight: 700;                      /* use a bold weight */
+  font-size: 3.6rem;                     /* slightly bigger for emphasis */
+  margin: 0;
+  letter-spacing: 1px;                   /* optional spacing for a stylish look */
 }

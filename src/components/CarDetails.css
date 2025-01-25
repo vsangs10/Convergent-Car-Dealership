@@ -1,11 +1,14 @@
+/* CarDetails.css */
+
 .car-details {
     padding: 20px;
     max-width: 900px;
     margin: 20px auto;
-    background: #f9f9f9;
+    background: #FFFFFF;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
   }
   
   .details-header {
@@ -36,11 +39,11 @@
   .details-info p {
     margin: 5px 0;
     font-size: 1rem;
-    color: #333;
+    color: #2C3E50;
   }
   
   .details-info p strong {
-    color: #001f3f;
+    color: #18BC9C; /* teal accent for labels */
   }
   
   .details-description {
@@ -49,21 +52,23 @@
   
   .details-description h3 {
     margin-bottom: 10px;
-    color: #001f3f;
+    color: #2C3E50;
+    font-weight: 700;
   }
   
   .back-button {
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #001f3f;
+    background-color: #2C3E50;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.2s;
   }
-  
   .back-button:hover {
-    background-color: #003366;
+    background-color: #34495E;
+    transform: translateY(-1px);
   }
   
